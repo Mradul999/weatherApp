@@ -1,0 +1,9 @@
+.current-tab{
+    background-color: rgba(219, 226, 239, 0.5);
+    border-radius: 4px;
+
+}
+
+.active{
+    scale: 1;
+}
