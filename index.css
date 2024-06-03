@@ -10,6 +10,9 @@
     --colorLight1: #DBE2EF;
     --colorLight2: #F9F7F7;
 }
+.active{
+    scale: 1;
+}
 .wrapper{
     height: 100vh;
     width: 100vw;
@@ -121,9 +124,9 @@
 
 }
 
-/* .user-info-container{
+.user-info-container{
     display:none;
-} */
+}
 
 .user-info-container.active{
     display: flex;
@@ -131,10 +134,12 @@
 }
 
 .name{
+    margin-top: 30px;
     font-size:20px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    
     gap: 5px;
     margin-bottom: 10px;
 
@@ -143,6 +148,7 @@
 .name img{
     width: 30px;
     height: 20px;
+   
 
 }
 
@@ -160,13 +166,87 @@
 
 [data-temp]{
     font-size: 30px;
+    margin-bottom:10px ;
 
+}
+.parameter img{
+    display: flex;
+    height:40px ;
+    width: 40px;
+    
+
+}
+.parameter{
+    background-color: rgba(182, 188, 198, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    
+    
+    padding: 15px 60px;
+    border-radius: 10px;
 }
 
 .parameter-container{
     display: flex;
     flex-direction: row;
+    gap:20px;
+
 }
+.parameter p{
+    font-size: 15px;
+    /* text-decoration: underline;
+     */
+     text-transform: uppercase;
+
+}
+
+.form-container{
+    display: none;
+}
+
+.form-container.active{
+    display: flex;
+}
+
+.search-container{
+    display:  flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+[data-searchInput]{
+    all: unset;
+    /* padding: 5px 165px;
+     */
+     width: 490px;
+     padding-left:8px;
+     
+    border-radius: 10px;
+    background-color: rgba(182, 188, 198, 0.4);
+    
+
+}
+[data-searchInput]::placeholder{
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    text-align: left;
+}
+
+
+
+.form-btn{
+    height: 20px;
+    width: 20px;
+    padding: 8px 9px;
+    border-radius: 50%;
+}
+
+
+
+
 
 
 

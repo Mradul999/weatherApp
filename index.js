@@ -17,13 +17,14 @@ function switchTab(clickedTab) {
     currentTab = clickedTab;
     currentTab.classList.add("current-tab");
 
-    if (!searchForm.classList.contains("active")) {
+    if (currentTab === searchTab) {
+      // If the search tab is active, show the search form and hide others
+      searchForm.classList.add("active");
       userInfoContainer.classList.remove("active");
       grantAccessContainer.classList.remove("active");
-      searchForm.classList.add("active");
     } else {
+      // If the user weather tab is active, show the user weather info
       searchForm.classList.remove("active");
-      userInfoContainer.classList.remove("active");
       getFromSessionStorage();
     }
   }
