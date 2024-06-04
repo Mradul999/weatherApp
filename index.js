@@ -17,13 +17,15 @@ function switchTab(clickedTab) {
     currentTab = clickedTab;
     currentTab.classList.add("current-tab");
 
-    if (currentTab === searchTab) {
+    if (currentTab===searchTab) {
       // If the search tab is active, show the search form and hide others
-      searchForm.classList.add("active");
+      
       userInfoContainer.classList.remove("active");
       grantAccessContainer.classList.remove("active");
+      searchForm.classList.add("active");
     } else {
       // If the user weather tab is active, show the user weather info
+      userInfoContainer.classList.remove("active")
       searchForm.classList.remove("active");
       getFromSessionStorage();
     }
@@ -43,11 +45,28 @@ function getFromSessionStorage() {
   const localCoordinates = sessionStorage.getItem("user-coordinates");
   if (!localCoordinates) {
     grantAccessContainer.classList.add("active");
+    userInfoContainer.classList.remove("active");
+    searchForm.classList.remove("active");
   } else {
     const coordinates = JSON.parse(localCoordinates);
     fetchUserWeatherInfo(coordinates);
   }
 }
+
+function getPermissionStatus() {
+  const permissionStatus = sessionStorage.getItem("permission-status");
+  if (permissionStatus === "granted") {
+    // If permission is granted, proceed with fetching weather info
+    getFromSessionStorage();
+  } else {
+    // If permission is not granted or not set, show the grant permission container
+    grantAccessContainer.classList.add("active");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  getPermissionStatus();
+});
 
 // Function to fetch user weather information
 async function fetchUserWeatherInfo(coordinates) {
@@ -95,9 +114,25 @@ grantAccessButton.addEventListener("click", getlocation);
 
 function getlocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
+    navigator.geolocation.getCurrentPosition(showPosition,showError);
   } else {
     alert("Geolocation is not supported by this browser."); 
+  }
+}
+function showError(error) {
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      alert("User denied the request for Geolocation.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+      alert("Location information is unavailable.");
+      break;
+    case error.TIMEOUT:
+      alert("The request to get user location timed out.");
+      break;
+    case error.UNKNOWN_ERROR:
+      alert("An unknown error occurred.");
+      break;
   }
 }
 
@@ -107,6 +142,7 @@ function showPosition(position) {
     lon: position.coords.longitude,
   };
   sessionStorage.setItem("user-coordinates", JSON.stringify(userCoordinates));
+  sessionStorage.setItem("permission-status", "granted");
   fetchUserWeatherInfo(userCoordinates);
 }
 
