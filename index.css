@@ -1,3 +1,4 @@
+/* universal selector */
 *,
 *::before,
 *::after {
@@ -6,6 +7,8 @@
   box-sizing: border-box;
   font-family: "Merriweather Sans", sans-serif;
 }
+
+/* global  colors */
 
 :root {
   --colorDark1: #112d4e;
@@ -201,6 +204,8 @@
 .form-container.active {
   display: flex;
 }
+
+/* media queries */
 
 @media (max-width: 600px) {
   .tab-container {
